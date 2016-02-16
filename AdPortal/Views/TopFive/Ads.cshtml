@@ -1,0 +1,67 @@
+﻿@using System.Security.Policy
+@model AdPortal.ViewModel.AdViewModel
+
+@{
+    ViewBag.Title = "The top five ads by page coverage amount";
+}
+
+<style>
+    .pagination {
+        margin-top: -1em;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                                Aid Id
+                        </th>
+                        <th>
+                                Brand Id
+                        </th>
+                        <th>
+                                Brand Name
+                        </th>
+                        <th>
+                                Num Pages
+                        </th>
+                        <th>
+                                Position
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Ads)
+                    {
+                        <tr>
+                            <td>
+                                @item.AdId
+                            </td>
+                            <td>
+                                @item.BrandId
+                            </td>
+                            <td>
+                                @item.BrandName
+                            </td>
+                            <td>
+                                @item.NumPages
+                            </td>
+                            <td>
+                                @item.Position
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+

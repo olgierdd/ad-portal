@@ -1,0 +1,54 @@
+﻿@using System.Security.Policy
+@model  IEnumerable<AdPortal.ViewModel.BrandCoverage>
+
+@{
+    ViewBag.Title = "The top five brand by page coverage amount";
+}
+
+<style>
+    .pagination {
+        margin-top: -1em;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Brand Id
+                            </th>
+                            <th>
+                                Brand Name
+                            </th>
+                            <th>
+                                Coverage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.BrandId
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Coverage
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

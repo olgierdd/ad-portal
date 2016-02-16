@@ -1,0 +1,126 @@
+﻿
+@using System.Security.Policy
+@model AdPortal.ViewModel.AdViewModel
+
+@{
+    ViewBag.Title = "Full List of Ads";
+}
+
+<style>
+    .pagination {
+        margin-top: -1em;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+  <!-- BEGIN HIDDEN FIELDS AREA -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.EventArgument)
+    @Html.HiddenFor(m => m.Pager.PageIndex)
+    @Html.HiddenFor(m => m.LastSortExpression)
+    @Html.HiddenFor(m => m.SortExpression)
+    @Html.HiddenFor(m => m.SortDirection)
+    @Html.HiddenFor(m => m.SortDirectionNew)
+  <!-- END HIDDEN FIELDS AREA -->
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <a href="#"
+                               data-pm-action="sort"
+                               data-pm-val="AdId"
+                               data-pm-direction="Ascending">
+                                Aid Id
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#"
+                               data-pm-action="sort"
+                               data-pm-val="BrandId"
+                               data-pm-direction="Ascending">
+                                Brand Id
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#"
+                               data-pm-action="sort"
+                               data-pm-val="BrandName"
+                               data-pm-direction="Descending">
+                                Brand Name
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#"
+                               data-pm-action="sort"
+                               data-pm-val="NumPages"
+                               data-pm-direction="Ascending">
+                                Num Pages
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#"
+                               data-pm-action="sort"
+                               data-pm-val="Position"
+                               data-pm-direction="Ascending">
+                                Position
+                            </a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Ads)
+                    {
+                        <tr>
+                            <td>
+                                @item.AdId
+                            </td>
+                            <td>
+                                @item.BrandId
+                            </td>
+                            <td>
+                                @item.BrandName
+                            </td>
+                            <td>
+                                @item.NumPages
+                            </td>
+                            <td>
+                                @item.Position
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            
+            @if (Model.IsPagerVisible)
+            {
+                <ul class="pagination pagination-sm">
+                    @foreach (var item in Model.Pages)
+                    {
+                        <li class="@item.CssClass">
+                            @{
+                                var fontStyle = item.IsSelected ? "800" : "300";
+                            }
+                            <a style="font-weight: @fontStyle" href="#"
+                                    data-pm-action="page"
+                                    data-pm-val="@item.Argument"
+                                    title="@item.Tooltip">
+                                    @Html.Raw(item.Text)
+                                </a>
+                        </li>
+                    }
+                </ul>
+
+            }
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script src="~/Scripts/tableSortPage.js"></script>
+}
