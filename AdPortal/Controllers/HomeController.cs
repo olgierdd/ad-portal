@@ -11,7 +11,6 @@ namespace AdPortal.Controllers
         // GET: Home
         public ActionResult About()
         {
-            ViewBag.Message = "Applying Boostrap template to presenting data in tabels.";
             return View();
         }
     }
